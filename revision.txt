@@ -1,0 +1,23 @@
+1. dataset.py
+  Line 21,23: self.rgb_list_file = 'list/ucf-i3d-test.list'
+  Line 59: features = np.array(features, dtype=np.float32)  
+    =>
+      features = np.array(features, dtype=np.float32)  # [89, 10, 2048]
+      # add ten crop 
+      features = np.expand_dims(features, axis=1)
+      features = np.tile(features, (1, 10, 1))
+      features = np.concatenate([features, features], axis=2)
+  Line 67: # process 10-cropped snippet feature
+    features = features.transpose(1, 0, 2)  # [10, B, T, F]  # [10, 89, 2048]
+    return features, label
+    
+2. main.py
+  Line 65: if step % 5 == 0 and step > 200: => if step % 100 == 0 and step > 100:
+  
+3. option.py
+  Line 9: default='list/gt-sh.npy' => default='list/gt-ucf.npy'
+  Line 17: default='shanghai' => "ucf"
+  
+4. test_10crop.py
+  Line 24:
+  gt = np.load('list/gt-ucf.npy')  => gt = np.load('list/gt-ucf.npy_') 
