@@ -12,7 +12,10 @@
     return features, label
     
 2. main.py
-  Line 65: if step % 5 == 0 and step > 200: => if step % 100 == 0 and step > 100:
+  Line 65: if step % 5 == 0 and step > 200: => if step % 100 == 0 and step > 100:  
+  Line 45: output_path = ''   # put your own path here 
+  
+  
   
 3. option.py
   Line 9: default='list/gt-sh.npy' => default='list/gt-ucf.npy'
